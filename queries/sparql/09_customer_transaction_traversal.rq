@@ -1,0 +1,27 @@
+PREFIX bank: <http://example.org/banking/>
+
+SELECT
+    ?customerId
+    ?name
+    ?accountId
+    ?transactionId
+    ?transactionType
+    ?amount
+WHERE {
+
+    ?customer
+        a bank:Customer ;
+        bank:customerId ?customerId ;
+        bank:fullName ?name ;
+        bank:holdsAccount ?account .
+
+    ?account
+        bank:accountId ?accountId ;
+        bank:hasTransaction ?transaction .
+
+    ?transaction
+        bank:transactionId ?transactionId ;
+        bank:transactionType ?transactionType ;
+        bank:amount ?amount .
+}
+LIMIT 100

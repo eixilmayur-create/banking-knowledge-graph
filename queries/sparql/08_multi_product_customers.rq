@@ -1,0 +1,32 @@
+PREFIX bank: <http://example.org/banking/>
+
+SELECT
+    ?customerId
+    ?name
+    (COUNT(DISTINCT ?account) AS ?accounts)
+    (COUNT(DISTINCT ?loan) AS ?loans)
+WHERE {
+
+    ?customer
+        a bank:Customer ;
+        bank:customerId ?customerId ;
+        bank:fullName ?name .
+
+    OPTIONAL {
+        ?customer bank:holdsAccount ?account .
+    }
+
+    OPTIONAL {
+        ?customer bank:borrowerOf ?loan .
+    }
+}
+GROUP BY
+    ?customerId
+    ?name
+
+HAVING (
+    COUNT(DISTINCT ?account) > 0 &&
+    COUNT(DISTINCT ?loan) > 0
+)
+
+ORDER BY DESC(?accounts)

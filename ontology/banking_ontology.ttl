@@ -1,0 +1,333 @@
+@prefix bank: <http://example.org/banking/> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+
+# ============================================================
+# ONTOLOGY
+# ============================================================
+
+bank:BankingOntology
+    a owl:Ontology ;
+    rdfs:label "Banking Knowledge Graph Ontology" .
+
+bank:BankingOntology
+    a owl:Ontology ;
+    rdfs:label "Banking Knowledge Graph Ontology" ;
+    owl:versionInfo "1.0.0" .
+
+# ============================================================
+# CLASSES
+# ============================================================
+
+bank:Customer
+    a owl:Class ;
+    rdfs:label "Customer" .
+
+
+bank:FinancialAccount
+    a owl:Class ;
+    rdfs:label "Financial Account" .
+
+
+bank:BankAccount
+    a owl:Class ;
+    rdfs:label "Bank Account" ;
+    rdfs:subClassOf bank:FinancialAccount .
+
+
+bank:Card
+    a owl:Class ;
+    rdfs:label "Card" ;
+    rdfs:subClassOf bank:FinancialAccount .
+
+
+bank:Loan
+    a owl:Class ;
+    rdfs:label "Loan" ;
+    rdfs:subClassOf bank:FinancialAccount .
+
+
+bank:Transaction
+    a owl:Class ;
+    rdfs:label "Transaction" .
+
+
+bank:Branch
+    a owl:Class ;
+    rdfs:label "Branch" .
+
+
+# ============================================================
+# OBJECT PROPERTIES
+# ============================================================
+
+bank:holdsAccount
+    a owl:ObjectProperty ;
+    rdfs:label "holds account" ;
+    rdfs:domain bank:Customer ;
+    rdfs:range bank:BankAccount .
+
+
+bank:borrowerOf
+    a owl:ObjectProperty ;
+    rdfs:label "borrower of" ;
+    rdfs:domain bank:Customer ;
+    rdfs:range bank:Loan .
+
+
+bank:linkedCard
+    a owl:ObjectProperty ;
+    rdfs:label "linked card" ;
+    rdfs:domain bank:BankAccount ;
+    rdfs:range bank:Card .
+
+
+bank:hasTransaction
+    a owl:ObjectProperty ;
+    rdfs:label "has transaction" ;
+    rdfs:domain bank:BankAccount ;
+    rdfs:range bank:Transaction .
+
+
+bank:maintainedAt
+    a owl:ObjectProperty ;
+    rdfs:label "maintained at" ;
+    rdfs:domain bank:BankAccount ;
+    rdfs:range bank:Branch .
+
+
+# ============================================================
+# CUSTOMER DATATYPE PROPERTIES
+# ============================================================
+
+bank:customerId
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Customer ;
+    rdfs:range xsd:string .
+
+
+bank:fullName
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Customer ;
+    rdfs:range xsd:string .
+
+
+bank:dateOfBirth
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Customer ;
+    rdfs:range xsd:date .
+
+
+bank:email
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Customer ;
+    rdfs:range xsd:string .
+
+
+bank:phone
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Customer ;
+    rdfs:range xsd:string .
+
+
+bank:panNumber
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Customer ;
+    rdfs:range xsd:string .
+
+
+bank:kycStatus
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Customer ;
+    rdfs:range xsd:string .
+
+
+bank:riskSegment
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Customer ;
+    rdfs:range xsd:string .
+
+
+# ============================================================
+# BANK ACCOUNT DATATYPE PROPERTIES
+# ============================================================
+
+bank:accountId
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:BankAccount ;
+    rdfs:range xsd:string .
+
+
+bank:accountType
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:BankAccount ;
+    rdfs:range xsd:string .
+
+
+bank:accountStatus
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:BankAccount ;
+    rdfs:range xsd:string .
+
+
+bank:balance
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:BankAccount ;
+    rdfs:range xsd:decimal .
+
+
+bank:currency
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:BankAccount ;
+    rdfs:range xsd:string .
+
+
+bank:openDate
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:BankAccount ;
+    rdfs:range xsd:date .
+
+
+# ============================================================
+# CARD DATATYPE PROPERTIES
+# ============================================================
+
+bank:cardId
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Card ;
+    rdfs:range xsd:string .
+
+
+bank:cardType
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Card ;
+    rdfs:range xsd:string .
+
+
+bank:network
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Card ;
+    rdfs:range xsd:string .
+
+
+bank:creditLimit
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Card ;
+    rdfs:range xsd:decimal .
+
+
+bank:cardStatus
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Card ;
+    rdfs:range xsd:string .
+
+
+bank:issueDate
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Card ;
+    rdfs:range xsd:date .
+
+
+# ============================================================
+# LOAN DATATYPE PROPERTIES
+# ============================================================
+
+bank:loanId
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Loan ;
+    rdfs:range xsd:string .
+
+
+bank:loanType
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Loan ;
+    rdfs:range xsd:string .
+
+
+bank:principalAmount
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Loan ;
+    rdfs:range xsd:decimal .
+
+
+bank:interestRate
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Loan ;
+    rdfs:range xsd:decimal .
+
+
+bank:tenureMonths
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Loan ;
+    rdfs:range xsd:integer .
+
+
+bank:loanStatus
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Loan ;
+    rdfs:range xsd:string .
+
+
+bank:sanctionDate
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Loan ;
+    rdfs:range xsd:date .
+
+
+# ============================================================
+# TRANSACTION DATATYPE PROPERTIES
+# ============================================================
+
+bank:transactionId
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Transaction ;
+    rdfs:range xsd:string .
+
+
+bank:transactionTimestamp
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Transaction ;
+    rdfs:range xsd:dateTime .
+
+
+bank:transactionType
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Transaction ;
+    rdfs:range xsd:string .
+
+
+bank:amount
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Transaction ;
+    rdfs:range xsd:decimal .
+
+
+bank:direction
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Transaction ;
+    rdfs:range xsd:string .
+
+
+bank:channel
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Transaction ;
+    rdfs:range xsd:string .
+
+
+bank:merchantCategory
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Transaction ;
+    rdfs:range xsd:string .
+
+
+# ============================================================
+# BRANCH DATATYPE PROPERTIES
+# ============================================================
+
+bank:branchId
+    a owl:DatatypeProperty ;
+    rdfs:domain bank:Branch ;
+    rdfs:range xsd:string .

@@ -1,0 +1,17 @@
+PREFIX bank: <http://example.org/banking/>
+
+SELECT ?transaction ?transactionId
+WHERE {
+
+    ?transaction
+        a bank:Transaction ;
+        bank:transactionId ?transactionId .
+
+    FILTER NOT EXISTS {
+
+        ?account
+            bank:hasTransaction
+            ?transaction .
+    }
+}
+ORDER BY ?transactionId

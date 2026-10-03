@@ -1,0 +1,16 @@
+source_system,source_column,sample_value,description,source_datatype,source_domain
+NEW_BANK,cust_nm,Rahul Sharma,Name of account customer,string,Customer
+NEW_BANK,cust_identifier,CUST99882,Unique customer number,string,Customer
+NEW_BANK,dob,1989-04-21,Birth date of customer,date,Customer
+NEW_BANK,mobile_no,9876543210,Registered customer mobile,string,Customer
+NEW_BANK,acct_no,ACC99221,Account identifier,string,BankAccount
+NEW_BANK,acct_bal,82500.50,Available account balance,decimal,BankAccount
+NEW_BANK,acct_category,SAVINGS,Type of account,string,BankAccount
+NEW_BANK,loan_amt,750000,Loan sanctioned principal value,decimal,Loan
+NEW_BANK,roi,8.75,Interest rate on loan,decimal,Loan
+NEW_BANK,loan_term,60,Loan repayment months,integer,Loan
+NEW_BANK,txn_value,12500,Value of financial transaction,decimal,Transaction
+NEW_BANK,txn_mode,UPI,Transaction type,string,Transaction
+NEW_BANK,branch_cd,BR009,Identifier of branch,string,Branch
+NEW_BANK,customer_account_link,ACC99221,Reference linking customer with account,resource,Customer
+NEW_BANK,promo_code,FESTIVE100,Marketing promotional campaign identifier,string,Marketing

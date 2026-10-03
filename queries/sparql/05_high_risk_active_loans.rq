@@ -1,0 +1,24 @@
+PREFIX bank: <http://example.org/banking/>
+
+SELECT
+    ?customerId
+    ?name
+    ?loanId
+    ?loanType
+    ?principal
+WHERE {
+
+    ?customer
+        a bank:Customer ;
+        bank:customerId ?customerId ;
+        bank:fullName ?name ;
+        bank:riskSegment "HIGH" ;
+        bank:borrowerOf ?loan .
+
+    ?loan
+        bank:loanId ?loanId ;
+        bank:loanType ?loanType ;
+        bank:principalAmount ?principal ;
+        bank:loanStatus "ACTIVE" .
+}
+ORDER BY DESC(?principal)

@@ -1,0 +1,17 @@
+PREFIX bank: <http://example.org/banking/>
+
+SELECT ?loan ?loanId
+WHERE {
+
+    ?loan
+        a bank:Loan ;
+        bank:loanId ?loanId .
+
+    FILTER NOT EXISTS {
+
+        ?customer
+            bank:borrowerOf
+            ?loan .
+    }
+}
+ORDER BY ?loanId

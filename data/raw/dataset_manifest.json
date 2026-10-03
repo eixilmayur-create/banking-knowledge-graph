@@ -1,0 +1,12 @@
+{
+  "project": "Banking Knowledge Graph Portfolio",
+  "total_rows": 20000,
+  "files": {
+    "crm_customers.csv": 4000,
+    "core_accounts.csv": 5000,
+    "card_accounts.csv": 3000,
+    "loan_accounts.csv": 2000,
+    "transactions.csv": 6000
+  },
+  "purpose": "Synthetic multi-source banking data for ontology, entity resolution, RDF, SHACL, SPARQL, Neo4j, GraphRAG, Gemini, GCP and AWS learning."
+}

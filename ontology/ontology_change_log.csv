@@ -1,0 +1,2 @@
+change_id,change_type,concept_id,entity,property,old_value,new_value,reason,status,requested_by,approved_by,version
+CHG0001,ADD_PROPERTY,,Promotion,promotionCode,,promotionCode,New source contains promotional identifiers,PENDING,,,1.1

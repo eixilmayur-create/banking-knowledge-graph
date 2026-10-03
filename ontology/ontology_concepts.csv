@@ -1,0 +1,38 @@
+concept_id,entity,property,concept_type,label,description,datatype
+C001,Customer,customerId,datatype_property,Customer ID,Unique canonical identifier for a bank customer,string
+C002,Customer,fullName,datatype_property,Customer Full Name,Complete name of the customer,string
+C003,Customer,dateOfBirth,datatype_property,Date of Birth,Customer date of birth,date
+C004,Customer,email,datatype_property,Email Address,Customer email address,string
+C005,Customer,phone,datatype_property,Phone Number,Customer contact phone number,string
+C006,Customer,panNumber,datatype_property,PAN Number,Indian PAN identifier of customer,string
+C007,Customer,kycStatus,datatype_property,KYC Status,Customer know your customer verification status,string
+C008,Customer,riskSegment,datatype_property,Risk Segment,Customer risk classification,string
+C009,BankAccount,accountId,datatype_property,Account ID,Unique identifier for bank account,string
+C010,BankAccount,accountType,datatype_property,Account Type,Type of bank account such as savings or current,string
+C011,BankAccount,accountStatus,datatype_property,Account Status,Current bank account lifecycle status,string
+C012,BankAccount,balance,datatype_property,Account Balance,Current monetary balance of bank account,decimal
+C013,BankAccount,currency,datatype_property,Currency,Currency associated with the bank account,string
+C014,BankAccount,openDate,datatype_property,Account Open Date,Date when account was opened,date
+C015,Card,cardId,datatype_property,Card ID,Unique identifier of card,string
+C016,Card,cardType,datatype_property,Card Type,Debit or credit card classification,string
+C017,Card,network,datatype_property,Card Network,Payment network such as Visa Mastercard or RuPay,string
+C018,Card,creditLimit,datatype_property,Credit Limit,Maximum credit amount allowed on card,decimal
+C019,Loan,loanId,datatype_property,Loan ID,Unique identifier of a loan,string
+C020,Loan,loanType,datatype_property,Loan Type,Type of loan such as home personal auto or business,string
+C021,Loan,principalAmount,datatype_property,Loan Principal Amount,Original principal amount of loan,decimal
+C022,Loan,interestRate,datatype_property,Interest Rate,Interest rate applied to the loan,decimal
+C023,Loan,tenureMonths,datatype_property,Loan Tenure,Loan repayment period in months,integer
+C024,Loan,loanStatus,datatype_property,Loan Status,Current lifecycle status of loan,string
+C025,Transaction,transactionId,datatype_property,Transaction ID,Unique transaction identifier,string
+C026,Transaction,transactionTimestamp,datatype_property,Transaction Timestamp,Date and time of transaction,datetime
+C027,Transaction,transactionType,datatype_property,Transaction Type,Type of banking transaction,string
+C028,Transaction,amount,datatype_property,Transaction Amount,Monetary value of the transaction,decimal
+C029,Transaction,direction,datatype_property,Transaction Direction,Debit or credit direction,string
+C030,Transaction,channel,datatype_property,Transaction Channel,Channel such as mobile web ATM branch or POS,string
+C031,Transaction,merchantCategory,datatype_property,Merchant Category,Merchant or transaction category,string
+C032,Branch,branchId,datatype_property,Branch ID,Unique banking branch identifier,string
+C033,Customer,holdsAccount,object_property,Holds Account,Relationship connecting customer to bank account,resource
+C034,Customer,borrowerOf,object_property,Borrower Of,Relationship connecting customer to loan,resource
+C035,BankAccount,linkedCard,object_property,Linked Card,Relationship connecting account to card,resource
+C036,BankAccount,hasTransaction,object_property,Has Transaction,Relationship connecting account to transaction,resource
+C037,BankAccount,maintainedAt,object_property,Maintained At,Relationship connecting bank account to branch,resource

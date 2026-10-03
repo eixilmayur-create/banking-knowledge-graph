@@ -1,0 +1,26 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*credentials*.json
+*service-account*.json
+application_default_credentials.json
+# Local and generated content
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.vscode/
+.idea/
+.DS_Store
+*.log
+data/processed/
+data/raw/external_customers.csv
+data/raw/external_customer_ground_truth.csv
+outputs/
+work/

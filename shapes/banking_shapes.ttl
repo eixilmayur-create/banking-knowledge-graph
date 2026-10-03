@@ -1,0 +1,365 @@
+@prefix bank: <http://example.org/banking/> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+
+# ============================================================
+# CUSTOMER SHAPE
+# ============================================================
+
+bank:CustomerShape
+    a sh:NodeShape ;
+
+    sh:targetClass bank:Customer ;
+
+
+    # customerId required exactly once
+    sh:property [
+        sh:path bank:customerId ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Customer must have exactly one customerId." ;
+    ] ;
+
+
+    # Full name required
+    sh:property [
+        sh:path bank:fullName ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 2 ;
+        sh:message "Customer must have a valid full name." ;
+    ] ;
+
+
+    # KYC allowed values
+    sh:property [
+        sh:path bank:kycStatus ;
+        sh:minCount 1 ;
+        sh:in (
+            "VERIFIED"
+            "PENDING"
+            "REJECTED"
+        ) ;
+        sh:message "KYC status must be VERIFIED, PENDING, or REJECTED." ;
+    ] ;
+
+
+    # Risk segment allowed values
+    sh:property [
+        sh:path bank:riskSegment ;
+        sh:in (
+            "LOW"
+            "MEDIUM"
+            "HIGH"
+        ) ;
+        sh:message "Risk segment must be LOW, MEDIUM, or HIGH." ;
+    ] .
+
+
+# ============================================================
+# BANK ACCOUNT SHAPE
+# ============================================================
+
+bank:BankAccountShape
+    a sh:NodeShape ;
+
+    sh:targetClass bank:BankAccount ;
+
+
+    sh:property [
+        sh:path bank:accountId ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Bank account must have exactly one accountId." ;
+    ] ;
+
+
+    sh:property [
+        sh:path bank:accountType ;
+        sh:minCount 1 ;
+        sh:in (
+            "SAVINGS"
+            "CURRENT"
+            "SALARY"
+        ) ;
+        sh:message "Account type must be SAVINGS, CURRENT, or SALARY." ;
+    ] ;
+
+
+    sh:property [
+        sh:path bank:accountStatus ;
+        sh:minCount 1 ;
+        sh:in (
+            "ACTIVE"
+            "DORMANT"
+            "CLOSED"
+        ) ;
+        sh:message "Invalid account status." ;
+    ] ;
+
+
+    sh:property [
+        sh:path bank:balance ;
+        sh:minCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+        sh:message "Account balance cannot be negative." ;
+    ] ;
+
+
+    sh:property [
+        sh:path bank:currency ;
+        sh:minCount 1 ;
+        sh:hasValue "INR" ;
+        sh:message "Account currency must be INR for this project." ;
+    ] ;
+
+
+    # Account must be maintained at a branch
+    sh:property [
+        sh:path bank:maintainedAt ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class bank:Branch ;
+        sh:message "Bank account must be maintained at one valid Branch." ;
+    ] ;
+
+
+    # Account must belong to at least one customer.
+    # The graph stores Customer -> holdsAccount -> Account,
+    # so we validate through the inverse path.
+    sh:property [
+        sh:path [
+            sh:inversePath bank:holdsAccount
+        ] ;
+        sh:minCount 1 ;
+        sh:class bank:Customer ;
+        sh:message "Bank account must be associated with a Customer." ;
+    ] .
+
+
+# ============================================================
+# CARD SHAPE
+# ============================================================
+
+bank:CardShape
+    a sh:NodeShape ;
+
+    sh:targetClass bank:Card ;
+
+
+    sh:property [
+        sh:path bank:cardId ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Card must have exactly one cardId." ;
+    ] ;
+
+
+    sh:property [
+        sh:path bank:cardType ;
+        sh:minCount 1 ;
+        sh:in (
+            "DEBIT"
+            "CREDIT"
+        ) ;
+        sh:message "Card type must be DEBIT or CREDIT." ;
+    ] ;
+
+
+    sh:property [
+        sh:path bank:network ;
+        sh:minCount 1 ;
+        sh:in (
+            "VISA"
+            "MASTERCARD"
+            "RUPAY"
+        ) ;
+        sh:message "Invalid card network." ;
+    ] ;
+
+
+    sh:property [
+        sh:path bank:creditLimit ;
+        sh:minCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+        sh:message "Credit limit cannot be negative." ;
+    ] ;
+
+
+    # Graph stores Account -> linkedCard -> Card
+    sh:property [
+        sh:path [
+            sh:inversePath bank:linkedCard
+        ] ;
+        sh:minCount 1 ;
+        sh:class bank:BankAccount ;
+        sh:message "Card must be linked to a BankAccount." ;
+    ] .
+
+
+# ============================================================
+# LOAN SHAPE
+# ============================================================
+
+bank:LoanShape
+    a sh:NodeShape ;
+
+    sh:targetClass bank:Loan ;
+
+
+    sh:property [
+        sh:path bank:loanId ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Loan must have exactly one loanId." ;
+    ] ;
+
+
+    sh:property [
+        sh:path bank:loanType ;
+        sh:minCount 1 ;
+        sh:in (
+            "PERSONAL"
+            "HOME"
+            "AUTO"
+            "BUSINESS"
+        ) ;
+        sh:message "Invalid loan type." ;
+    ] ;
+
+
+    sh:property [
+        sh:path bank:principalAmount ;
+        sh:minCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minExclusive 0 ;
+        sh:message "Loan principal must be greater than zero." ;
+    ] ;
+
+
+    sh:property [
+        sh:path bank:interestRate ;
+        sh:minCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "Interest rate must be between 0 and 100." ;
+    ] ;
+
+
+    sh:property [
+        sh:path bank:tenureMonths ;
+        sh:minCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minExclusive 0 ;
+        sh:message "Loan tenure must be greater than zero." ;
+    ] ;
+
+
+    # Customer -> borrowerOf -> Loan
+    sh:property [
+        sh:path [
+            sh:inversePath bank:borrowerOf
+        ] ;
+        sh:minCount 1 ;
+        sh:class bank:Customer ;
+        sh:message "Loan must have at least one borrower." ;
+    ] .
+
+
+# ============================================================
+# TRANSACTION SHAPE
+# ============================================================
+
+bank:TransactionShape
+    a sh:NodeShape ;
+
+    sh:targetClass bank:Transaction ;
+
+
+    sh:property [
+        sh:path bank:transactionId ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Transaction must have exactly one transactionId." ;
+    ] ;
+
+
+    sh:property [
+        sh:path bank:amount ;
+        sh:minCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minExclusive 0 ;
+        sh:message "Transaction amount must be greater than zero." ;
+    ] ;
+
+
+    sh:property [
+        sh:path bank:direction ;
+        sh:minCount 1 ;
+        sh:in (
+            "DEBIT"
+            "CREDIT"
+        ) ;
+        sh:message "Transaction direction must be DEBIT or CREDIT." ;
+    ] ;
+
+
+    sh:property [
+        sh:path bank:channel ;
+        sh:minCount 1 ;
+        sh:in (
+            "MOBILE"
+            "WEB"
+            "ATM"
+            "BRANCH"
+            "POS"
+        ) ;
+        sh:message "Invalid transaction channel." ;
+    ] ;
+
+
+    sh:property [
+        sh:path bank:transactionTimestamp ;
+        sh:minCount 1 ;
+        sh:datatype xsd:dateTime ;
+        sh:message "Transaction must have a valid timestamp." ;
+    ] ;
+
+
+    # Account -> hasTransaction -> Transaction
+    sh:property [
+        sh:path [
+            sh:inversePath bank:hasTransaction
+        ] ;
+        sh:minCount 1 ;
+        sh:class bank:BankAccount ;
+        sh:message "Transaction must belong to a BankAccount." ;
+    ] .
+
+
+# ============================================================
+# BRANCH SHAPE
+# ============================================================
+
+bank:BranchShape
+    a sh:NodeShape ;
+
+    sh:targetClass bank:Branch ;
+
+    sh:property [
+        sh:path bank:branchId ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Branch must have exactly one branchId." ;
+    ] .

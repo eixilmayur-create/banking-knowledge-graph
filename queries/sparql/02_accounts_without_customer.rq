@@ -1,0 +1,17 @@
+PREFIX bank: <http://example.org/banking/>
+
+SELECT ?account ?accountId
+WHERE {
+
+    ?account
+        a bank:BankAccount ;
+        bank:accountId ?accountId .
+
+    FILTER NOT EXISTS {
+
+        ?customer
+            bank:holdsAccount
+            ?account .
+    }
+}
+ORDER BY ?accountId

@@ -1,0 +1,18 @@
+PREFIX bank: <http://example.org/banking/>
+
+SELECT
+    ?accountId
+    (COUNT(?transaction) AS ?transactionCount)
+    (SUM(?amount) AS ?totalTransactionValue)
+WHERE {
+
+    ?account
+        a bank:BankAccount ;
+        bank:accountId ?accountId ;
+        bank:hasTransaction ?transaction .
+
+    ?transaction
+        bank:amount ?amount .
+}
+GROUP BY ?accountId
+ORDER BY DESC(?totalTransactionValue)

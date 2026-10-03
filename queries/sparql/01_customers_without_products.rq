@@ -1,0 +1,19 @@
+PREFIX bank: <http://example.org/banking/>
+
+SELECT ?customer ?customerId ?name
+WHERE {
+
+    ?customer
+        a bank:Customer ;
+        bank:customerId ?customerId ;
+        bank:fullName ?name .
+
+    FILTER NOT EXISTS {
+        ?customer bank:holdsAccount ?account .
+    }
+
+    FILTER NOT EXISTS {
+        ?customer bank:borrowerOf ?loan .
+    }
+}
+ORDER BY ?customerId
