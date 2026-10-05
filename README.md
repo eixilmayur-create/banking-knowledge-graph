@@ -509,12 +509,4 @@ Production work includes authentication, customer-level authorization, safe erro
 
 Never commit `.env`, tokens, service-account files or real banking data. See [SECURITY.md](SECURITY.md).
 
-## Interview walkthrough
-
-1. **Problem, 30 seconds:** Explain fragmented identity and product relationships.
-2. **Pipeline, 90 seconds:** Trace a CRM row into its golden ID and RDF constraints; explain the separation between matching and merging.
-3. **Graph, 60 seconds:** Show Customer → BankAccount → Transaction and an optional shared network.
-4. **GraphRAG, 90 seconds:** Ask a supported question, inspect intent/evidence, then try an unsupported request.
-5. **Engineering, 60 seconds:** Discuss dual representations, controlled queries, synthetic confidence and production gaps.
-
 Without connected services, use RDF, validation reports and the query catalog for an explicitly offline walkthrough. See the [interview guide](docs/INTERVIEW_GUIDE.md) and [architecture deep dive](docs/ARCHITECTURE.md).
