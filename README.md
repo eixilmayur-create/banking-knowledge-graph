@@ -8,8 +8,6 @@
 
 This project explores how fragmented banking records can be cleaned, linked, modeled, validated and queried through a natural-language interface. It includes three workflows: batch banking-data preparation, schema mapping with human review, and a live Customer 360 / GraphRAG application.
 
-Documentation checked against the current VS Code project on **5 October 2026**. The public edition retains demo identity substitutions and credential protections. This is a portfolio prototype; production gaps are documented explicitly.
-
 ## Contents
 
 - [Business problem and capabilities](#business-problem-and-capabilities)
