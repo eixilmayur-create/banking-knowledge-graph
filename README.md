@@ -22,7 +22,6 @@ This project explores how fragmented banking records can be cleaned, linked, mod
 - [Repository guide](#repository-guide)
 - [Validation and troubleshooting](#validation-and-troubleshooting)
 - [Tradeoffs and next steps](#tradeoffs-and-next-steps)
-- [Interview walkthrough](#interview-walkthrough)
 
 [Architecture deep dive](docs/ARCHITECTURE.md) · [Workflow runbook](docs/WORKFLOWS.md) · [Interview guide](docs/INTERVIEW_GUIDE.md) · [Demo](docs/DEMO.md) · [Validation](docs/VALIDATION.md) · [Security](SECURITY.md)
 
