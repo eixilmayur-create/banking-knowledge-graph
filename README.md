@@ -503,7 +503,3 @@ GitHub runs syntax checks and those tests with mocked services. It does not run 
 | Module-level clients | Straightforward prototype | Add dependency injection and unified cleanup |
 
 Production work includes authentication, customer-level authorization, safe errors, TLS, rate limits, monitoring, dependency locking and secret management. There is no measured production throughput, p95 latency or financial-impact result. Cloud SDK dependencies do not establish implemented AWS, BigQuery or storage deployments.
-
-Never commit `.env`, tokens, service-account files or real banking data. See [SECURITY.md](SECURITY.md).
-
-Without connected services, use RDF, validation reports and the query catalog for an explicitly offline walkthrough. See the [interview guide](docs/INTERVIEW_GUIDE.md) and [architecture deep dive](docs/ARCHITECTURE.md).
